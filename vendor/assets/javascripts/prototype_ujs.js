@@ -140,18 +140,22 @@
   }
 
   function disableFormElements(form) {
-    input = form.retrieve('rails:submit-button');
-    if (window.hiddenCommit) {
-      window.hiddenCommit.setAttribute('name', input.name);
-      window.hiddenCommit.setAttribute('value', input.value);
-    } else {
-      hiddenCommit = document.createElement('input');
-      hiddenCommit.type = 'hidden';
-      hiddenCommit.value = input.value;
-      hiddenCommit.name = input.name;
-      form.appendChild(hiddenCommit);
-    }
-    input.setValue(input.readAttribute('data-disable-with')).disable();
+    form.select('input[type=submit][data-disable-with]').each(function(input) {
+      if (input.name == form.retrieve('rails:submit-button')) {
+        if (window.hiddenCommit) {
+          window.hiddenCommit.setAttribute('name', input.name);
+          window.hiddenCommit.setAttribute('value', input.value);
+        } else {
+          hiddenCommit = document.createElement('input');
+          hiddenCommit.type = 'hidden';
+          hiddenCommit.value = input.value;
+          hiddenCommit.name = input.name;
+          form.appendChild(hiddenCommit);
+        }
+        input.setValue(input.readAttribute('data-disable-with')).disable();
+        return;
+      }
+    });
   }
 
   function enableFormElements(form) {
