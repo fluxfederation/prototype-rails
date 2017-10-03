@@ -119,6 +119,7 @@ module ActionView
       #     <option value="0">Hello</option>
       #     <option value="1">World</option>
       #   </select>
+      deprecate :remote_function
       def remote_function(options)
         javascript_options = options_for_ajax(options)
 
@@ -600,6 +601,7 @@ module ActionView
       #   update_page do |page|
       #     page.hide 'spinner'
       #   end
+      deprecate :update_page
       def update_page(&block)
         JavaScriptGenerator.new(self, &block).to_s
       end
@@ -610,6 +612,7 @@ module ActionView
       #
       # +html_options+ may be a hash of <tt>\<script></tt> attributes to be
       # passed to ActionView::Helpers::JavaScriptHelper#javascript_tag.
+      deprecate :update_page_tag
       def update_page_tag(html_options = {}, &block)
         javascript_tag update_page(&block), html_options
       end

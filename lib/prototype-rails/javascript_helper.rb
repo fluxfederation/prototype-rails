@@ -29,6 +29,7 @@ ActionView::Helpers::JavaScriptHelper.module_eval do
   #   button_to_function "Details", :class => "details_button" do |page|
   #     page[:details].visual_effect :toggle_slide
   #   end
+  deprecate :button_to_function
   def button_to_function(name, *args, &block)
     html_options = args.extract_options!.symbolize_keys
 
@@ -55,6 +56,7 @@ ActionView::Helpers::JavaScriptHelper.module_eval do
   #       };
   #       return false;">Show me more</a>
   #
+  deprecate :link_to_function
   def link_to_function(name, *args, &block)
     html_options = args.extract_options!.symbolize_keys
 
