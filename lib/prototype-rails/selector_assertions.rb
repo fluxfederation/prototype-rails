@@ -118,7 +118,7 @@ module PrototypeRails
         @response.body.gsub(pattern) do |match|
           html = unescape_rjs(match)
           matches ||= []
-          matches.concat HTML::Document.new(html).root.children.select { |n| n.tag? }
+          matches.concat Nokogiri::HTML::Document.parse(html).root.children.map(&:elements).first.to_a
           ""
         end
     end
